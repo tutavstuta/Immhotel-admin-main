@@ -13,12 +13,14 @@ export default {
                 {
                     label:"Dashboard",
                     icon: "pi pi-chart-line",
+                    to:'/'
 
                 },
                 {
                     label:"การจอง",
                     icon: "pi pi-calendar",
-
+                    to:'/home/employee',
+                    badge: 'NEW'
                 },
                 {
                   label:"การชำระเงิน",
@@ -49,6 +51,7 @@ export default {
             {
               label: "ห้องพัก",
               icon: "pi pi-plus",
+              to:'/login'
         
             },
             {

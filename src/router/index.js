@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue';
-import LoginView from '../views/LoginView.vue';
+import UserService from '@/services/userservice';
+import HomeView from '@/views/HomeView.vue';
+import LoginView from '@/views/LoginView.vue';
+import DashboardView from '@/views/dashboard/DashboardView.vue';
+import EmployeeView from "@/views/dashboard/EmployeeView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,10 +11,22 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      children: [
+        {
+          path: '/home',
+          name: 'dashboard',
+          component: DashboardView
+        },
+        {
+          path:'/home/employee',
+          name: 'employee',
+          component: EmployeeView
+        }
+      ]
     },
     {
-      path:'/login',
+      path: '/login',
       name: 'login',
       component: LoginView
     },
@@ -24,6 +39,28 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     }
   ]
-})
+});
 
-export default router
+
+const Authenticated = async () => {
+
+  const userService = new UserService();
+  let authen = false;
+  await userService.getMe().then((response) => {
+
+    if (response.message === "get me successfully")
+      authen = true
+  }).catch((err) => console.error(err));
+
+  return authen
+};
+
+router.beforeEach(async (to, from, next) => {
+
+  const isAuthenticated = await Authenticated();
+
+  if (to.name !== 'login' && !isAuthenticated) next({ name: 'login' })
+  else next()
+});
+
+export default router;

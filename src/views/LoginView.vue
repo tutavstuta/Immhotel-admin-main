@@ -13,17 +13,18 @@ export default {
   },
   methods: {
     async login() {
-      // Implement your login logic here
-      console.log("Logging in... username %s password ",this.username,this.password);
-      await this.userService.login(this.username,this.password).then(result=>{
-        if(result.message==='login successful'){
-            console.log(result);
-            localStorage.setItem('token',result.token);
-            this.$router.push('/home');
-        }else{
-            console.log('invalid login username or password')
-        }
-      })
+      await this.userService
+        .login(this.username, this.password)
+        .then((result) => {
+          if (result.message === "login successful") {
+            this.$router.push("/home");
+          } else {
+            this.$router.push("/login");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
