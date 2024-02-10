@@ -1,26 +1,47 @@
 
 <template>
-    <div class="card">
-        <DataTable :value="customers" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
-            <Column field="name" header="Name" style="width: 25%"></Column>
-            <Column field="country.name" header="Country" style="width: 25%"></Column>
-            <Column field="company" header="Company" style="width: 25%"></Column>
-            <Column field="representative.name" header="Representative" style="width: 25%"></Column>
+    <div>
+        <PageHeading/>
+    </div>
+    <div class="card py-3">
+        <DataTable :value="employees" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
+            <Column field="first_name" header="ชื่อ" style="width: 25%"></Column>
+            <Column field="last_name" header="นามสกุล" style="width: 25%"></Column>
+            <Column field="username" header="ชื่อผู้ใช้" style="width: 25%"></Column>
+            <Column field="role" header="ตำแหน่ง" style="width: 25%"></Column>
         </DataTable>
     </div>
 </template>
 
 <script>
-// import { CustomerService } from '@/service/CustomerService';
+import UserService from '@/services/userservice';
+import PageHeading from "@/components/PageHeading.vue";
 
 export default {
+    setup(){
+        const userService = new UserService();
+        return { userService }
+    },
+    components:{
+        PageHeading
+    },
     data() {
         return {
-            customers: null
+            employees: null
         };
     },
     mounted() {
-        // CustomerService.getCustomersMedium().then((data) => (this.customers = data));
+        this.getEmployee();
+    },
+    methods:{
+        async getEmployee(){
+            await this.userService.getEmployee().then(result=>{
+                if(result){
+                    console.log(result);
+                    this.employees = result.data;
+                }
+            })
+        }
     }
 };
 </script>
