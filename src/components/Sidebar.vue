@@ -84,7 +84,12 @@ export default {
             {
               label: "ออกจากระบบ",
               icon: "pi pi-sign-out",
-              route: "/",
+              command:()=>{
+                localStorage.clear();
+                this.$router.push('/login');
+              },
+              route:"/login"
+              
             },
           ],
         },
