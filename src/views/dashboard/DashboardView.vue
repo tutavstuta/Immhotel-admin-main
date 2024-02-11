@@ -1,4 +1,5 @@
 <script>
+import BreadcrumbDashboard from "@/components/BreadcrumbDashboard.vue";
 import PageHeading from "@/components/PageHeading.vue";
 import DashboardCard from "@/components/DashboardCard.vue";
 import DashboardGraph from "@/components/DashboardGraph.vue";
@@ -9,7 +10,8 @@ export default {
         PageHeading,
         DashboardCard,
         DashboardGraph,
-        DashboardTable
+        DashboardTable,
+        BreadcrumbDashboard
 
     }
 }
@@ -17,6 +19,7 @@ export default {
 
 
 <template>
+  <BreadcrumbDashboard/>
   <PageHeading />
   <DashboardCard />
   <!-- Dashboard content -->
