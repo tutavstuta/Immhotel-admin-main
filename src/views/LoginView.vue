@@ -44,7 +44,7 @@ export default {
         <InputGroupAddon>
           <i class="pi pi-key"></i>
         </InputGroupAddon>
-        <Password  v-model="password" placeholder="รหัสผ่าน" toggleMask />
+        <Password  v-model="password" placeholder="รหัสผ่าน" toggleMask :feedback="false" />
       </div>
       <Button label="เข้าสู่ระบบ" @click="login" />
     </div>

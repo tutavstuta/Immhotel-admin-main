@@ -18,7 +18,7 @@ export default {
             {
               label: "การจอง",
               icon: "pi pi-calendar",
-              route: "/home/employee",
+              route: "/",
               badge: "NEW",
             },
             {

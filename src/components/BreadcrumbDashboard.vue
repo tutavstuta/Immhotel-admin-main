@@ -42,7 +42,7 @@ export default {
       for (let i = 0; i < routes.length; i++) {
         this.items.push({ label: routes[i] });
       }
-      console.log(this.items);
+      
     },
   },
 };

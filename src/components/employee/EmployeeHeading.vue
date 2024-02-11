@@ -22,14 +22,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="mt-3 lg:mt-0">
-          <Button
-            label="เพิ่ม"
-            class="mr-2"
-            icon="pi pi-user-plus"
-          ></Button>
         
-        </div>
       </div>
     </div>
   </template>
