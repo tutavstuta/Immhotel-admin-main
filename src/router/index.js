@@ -26,7 +26,12 @@ const router = createRouter({
           path:'/home/employee',
           name: 'employee',
           component: EmployeeView
-        }
+        },
+        {
+          path:'/home/hotel',
+          name: 'hotel',
+          component: () => import("@/views/dashboard/HotelView.vue")
+        },
       ]
     },
     {

@@ -69,7 +69,7 @@ export default {
             {
               label: "ข้อมูลโรงแรม",
               icon: "pi pi-building",
-              route: "/",
+              route: "/home/hotel",
             },
           ],
         },

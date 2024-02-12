@@ -340,8 +340,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.p-password-panel {
-  width: 3rem;
-}
-</style>
+
