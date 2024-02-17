@@ -118,4 +118,36 @@ export default class HotelService {
                 });
         });
     };
+
+    hotelUpload(files) {
+
+        return new Promise((resolve, reject) => {
+
+            const FormData = require('form-data');
+            let data = new FormData();
+
+            for (let file of files) {
+                data.append('image', file);
+            }
+
+            let config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: `${this.BASE_URL}/imm_hotel/hotel/upload`,
+                headers: {
+                    'Authorization': `Bearer ${this.#token}`,
+                },
+                data: data
+            };
+
+            axios.request(config)
+                .then((response) => {
+                    resolve(response.data);
+                })
+                .catch((error) => {
+                    reject(error.message);
+                });
+        });
+
+    }
 }
