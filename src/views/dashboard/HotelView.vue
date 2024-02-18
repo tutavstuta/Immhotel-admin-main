@@ -24,11 +24,11 @@
           <label for="name">ชือโรงแรม</label>
           <InputText id="name" v-model="hotel.name" />
         </div>
-        <div v-for="(item,index) in hotel.phone_number" :key="index">
+        <div v-for="(item, index) in hotel.phone_number" :key="index">
           <div class="flex flex-column gap-2 mb-3">
-          <label for="address">เบอร์โทร{{index+1}}</label>
-          <InputText id="address" v-model="hotel.phone_number[index]" />
-        </div>
+            <label for="address">เบอร์โทร{{ index + 1 }}</label>
+            <InputText id="address" v-model="hotel.phone_number[index]" />
+          </div>
         </div>
         <div class="flex flex-column gap-2 mb-3">
           <label for="address">ที่อยู่</label>
@@ -74,7 +74,7 @@
         </div>
         <div class="flex flex-column gap-2 mb-3">
           <label for="country">ลานจอดรถ</label>
-          <InputText id="country" v-model="hotel.parking"/>
+          <InputText id="country" v-model="hotel.parking" />
         </div>
         <div class="flex flex-column gap-2 mb-3">
           <label for="description">ไฮไลท์</label>
@@ -96,14 +96,44 @@
           <label for="description">ช้อจำกัดความเป้นส่วนตัว</label>
           <Textarea v-model="hotel.property_policies" rows="5" cols="30" />
         </div>
-        <Button label="บันทึก" class="mb-5" @click="updateHotel"/>
+        <Button label="บันทึก" class="mb-5" @click="updateHotel" />
         <!-- End Content for the first column -->
       </div>
       <div class="col-6 px-3">
         <!-- Content for the second column -->
         <div>
-            <span>รูปภาพ</span>
-            <UploadImage class="mt-2"/>
+          <div class="flex justify-content-between">
+            <div>รูปภาพ</div>
+            <div>
+              <div class="card flex justify-content-center">
+                <ToggleButton
+                  v-model="checked"
+                  class="w-6rem"
+                  severity="warning"
+                  onLabel="ยกเลิก"
+                  offLabel="ลบรูป"
+                />
+              </div>
+            </div>
+          </div>
+          <UploadImage class="mt-2 mb-3" @click="checked=false" @uploadresult="(msg)=>uploadSuccess=msg"/>
+          <div class="grid">
+            <div class="col-4" v-for="(item, index) in hotel.image" key="index">
+              <div id="image">
+                <ImageSimple :url="item.filename" />
+              </div>
+              <div id="delete-button" v-if="checked">
+                <Button
+                  icon="pi pi-times"
+                  severity="danger"
+                  text
+                  rounded
+                  aria-label="Delete"
+                  @click="deleteImage(item._id)"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -117,6 +147,7 @@ import HotelService from "@/services/hotelservice";
 import { useToast } from "primevue/usetoast";
 import BreadcrumbDashboard from "@/components/BreadcrumbDashboard.vue";
 import UploadImage from "@/components/UploadImage.vue";
+import ImageSimple from "@/components/ImageSimple.vue";
 
 export default {
   setup() {
@@ -126,7 +157,8 @@ export default {
   },
   components: {
     BreadcrumbDashboard,
-    UploadImage
+    UploadImage,
+    ImageSimple,
   },
   data() {
     return {
@@ -153,6 +185,8 @@ export default {
         { name: "Istanbul", code: "IST" },
         { name: "Paris", code: "PRS" },
       ],
+      checked: false,
+      uploadSuccess: false,
     };
   },
   created() {
@@ -161,10 +195,16 @@ export default {
   mounted() {
     this.getHotel();
   },
+  watch: {
+    async uploadSuccess(newUploadSuccess) {
+      
+      await this.getHotel();
+      this.uploadSuccess = false;
+    }
+  },
   methods: {
     async getHotel() {
       await this.hotelService.getHotelById(this.id).then((result) => {
-      
         if (result?.message === "get hotel successfully") {
           this.hotel = result.data;
         } else {
@@ -177,26 +217,43 @@ export default {
         }
       });
     },
-    async updateHotel(){
-      await this.hotelService.updateHotel(this.hotel,this.id).then(result=>{
-        if(result.message==='update hotel successfully'){
-          this.$toast.add({
-            severity: "success",
-            summary: "อัพเดท",
-            detail: "อัพเดทข้อมูลโรงแรมสำเร็จ",
-            life: 3000,
-          });
+    async updateHotel() {
+      await this.hotelService
+        .updateHotel(this.hotel, this.id)
+        .then((result) => {
+          if (result.message === "update hotel successfully") {
+            this.$toast.add({
+              severity: "success",
+              summary: "อัพเดท",
+              detail: "อัพเดทข้อมูลโรงแรมสำเร็จ",
+              life: 3000,
+            });
+          } else {
+            this.$toast.add({
+              severity: "error",
+              summary: "อัพเดทข้อมูลไม่สำเร็จ",
+              detail: result.message,
+              life: 3000,
+            });
+          }
+        });
+    },
+    async deleteImage(id) {
+      await this.hotelService.deleteImage(id).then((result) => {
+        console.log(result);
+        if(result){
+          this.getHotel();
         }else{
           this.$toast.add({
-            severity: "error",
-            summary: "อัพเดทข้อมูลไม่สำเร็จ",
-            detail: result.message,
-            life: 3000,
-          });
+              severity: "error",
+              summary: "อัพเดทข้อมูลไม่สำเร็จ",
+              detail: result.message,
+              life: 3000,
+            });
         }
-
-      })
-    }
+      });
+    },
+    
   },
 };
 </script>

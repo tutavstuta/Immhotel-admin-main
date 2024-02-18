@@ -141,12 +141,13 @@ export default {
       token: "",
     };
   },
+  emit:["uploadresult"],
   mounted() {
     this.token = localStorage.getItem("token");
   },
   methods: {
     onRemoveTemplatingFile(file, removeFileCallback, index) {
-      console.log("onRemoveTemplatingFile", file);
+      
       removeFileCallback(index);
       this.totalSize -= parseInt(this.formatSize(file.size));
       this.totalSizePercent = this.totalSize / 10;
@@ -168,13 +169,14 @@ export default {
       callback();
     },
     onTemplatedUpload(e) {
-      console.log("onTemplatedUpload", e);
+      
       this.$toast.add({
         severity: "info",
         summary: "Success",
         detail: "File Uploaded",
         life: 3000,
       });
+      this.$emit('uploadresult',true)
     },
     formatSize(bytes) {
       const k = 1024;

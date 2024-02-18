@@ -26,7 +26,7 @@ export default class HotelService {
                     resolve(response.data)
                 })
                 .catch((error) => {
-                    reject(error)
+                    reject(error.message)
                 });
         });
     };
@@ -49,7 +49,7 @@ export default class HotelService {
                     resolve(response.data)
                 })
                 .catch((error) => {
-                    reject(error);
+                    reject(error.message);
                 });
         });
     }
@@ -92,7 +92,7 @@ export default class HotelService {
                     resolve(response.data);
                 })
                 .catch((error) => {
-                    reject(error);
+                    reject(error.message);
                 });
         });
     };
@@ -114,7 +114,7 @@ export default class HotelService {
                     resolve(response.data);
                 })
                 .catch((error) => {
-                    reject(error);
+                    reject(error.message);
                 });
         });
     };
@@ -149,5 +149,28 @@ export default class HotelService {
                 });
         });
 
+    };
+
+    deleteImage(id) {
+
+        return new Promise((resolve, reject) => {
+
+            let config = {
+                method: 'delete',
+                maxBodyLength: Infinity,
+                url: `${this.BASE_URL}/imm_hotel/hotel/upload/${id}`,
+                headers: {
+                    'Authorization': `Bearer ${this.#token}`
+                }
+            };
+
+            axios.request(config)
+                .then((response) => {
+                    resolve(response.data);
+                })
+                .catch((error) => {
+                    reject(error.message);
+                });
+        });
     }
 }
