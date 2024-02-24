@@ -244,6 +244,7 @@ export default {
         acceptClass: "p-button-danger",
         accept: async () => {
           await this.deleteEmployee(this.selectedId);
+          this.selectedId = "";
         },
         reject: () => {
         //   this.$toast.add({

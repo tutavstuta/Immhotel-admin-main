@@ -54,7 +54,7 @@ export default {
             {
               label: "ห้องพัก",
               icon: "pi pi-plus",
-              route: "/",
+              route: "/room",
             },
             {
               label: "โปรโมชั่น",

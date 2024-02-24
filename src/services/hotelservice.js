@@ -1,5 +1,4 @@
 import axios from "axios"
-
 export default class HotelService {
 
     BASE_URL = import.meta.env.VITE_APP_BASE_URL;
@@ -26,7 +25,7 @@ export default class HotelService {
                     resolve(response.data)
                 })
                 .catch((error) => {
-                    reject(error.message)
+                    reject(error.response.data)
                 });
         });
     };
@@ -49,7 +48,7 @@ export default class HotelService {
                     resolve(response.data)
                 })
                 .catch((error) => {
-                    reject(error.message);
+                    reject(error.response.data);
                 });
         });
     }
@@ -92,7 +91,7 @@ export default class HotelService {
                     resolve(response.data);
                 })
                 .catch((error) => {
-                    reject(error.message);
+                    reject(error.response.data);
                 });
         });
     };
@@ -114,7 +113,7 @@ export default class HotelService {
                     resolve(response.data);
                 })
                 .catch((error) => {
-                    reject(error.message);
+                    reject(error.response.data);
                 });
         });
     };
@@ -145,7 +144,7 @@ export default class HotelService {
                     resolve(response.data);
                 })
                 .catch((error) => {
-                    reject(error.message);
+                    reject(error.response.data);
                 });
         });
 
@@ -169,7 +168,7 @@ export default class HotelService {
                     resolve(response.data);
                 })
                 .catch((error) => {
-                    reject(error.message);
+                    reject(error.response.data);
                 });
         });
     }
