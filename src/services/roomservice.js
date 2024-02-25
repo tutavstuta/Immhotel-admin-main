@@ -127,5 +127,34 @@ export class RoomService {
                     reject(error.response.data);
                 });
         });
+    };
+
+    /**
+     * 
+     * @param {String} id 
+     * @param {FormData} image 
+     * @returns 
+     */
+    uploadCoverImage(id, image) {
+        return new Promise((resolve, reject) => {
+
+            let config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: `${this.BASE_URL}/imm_hotel/room/upload-cover/${id}`,
+                headers: {
+                    'Authorization': `Bearer ${this.#token}`
+                },
+                data: image
+            };
+
+            axios.request(config)
+                .then((response) => {
+                    resolve(response.data);
+                })
+                .catch((error) => {
+                    reject(error.response.data);
+                });
+        });
     }
 }

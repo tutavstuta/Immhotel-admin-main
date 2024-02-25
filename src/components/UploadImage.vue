@@ -3,7 +3,7 @@
     <Toast />
     <FileUpload
       name="image"
-      url="http://localhost:3000/imm_hotel/hotel/upload"
+      :url=url
       @before-send="beforeSend($event)"
       @upload="onTemplatedUpload($event)"
       :multiple="true"
@@ -131,6 +131,12 @@
 
 <script>
 export default {
+  props:{
+    url:{
+      type:String,
+      default:""
+    }
+  },
   data() {
     return {
       uploadUrl: "",
@@ -176,7 +182,7 @@ export default {
         detail: "File Uploaded",
         life: 3000,
       });
-      this.$emit('uploadresult',true)
+      this.$emit('uploadresult',true);
     },
     formatSize(bytes) {
       const k = 1024;

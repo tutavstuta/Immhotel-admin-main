@@ -5,6 +5,7 @@ import LoginView from '@/views/LoginView.vue';
 import DashboardView from '@/views/dashboard/DashboardView.vue';
 import EmployeeView from "@/views/dashboard/EmployeeView.vue";
 import RoomView from '@/views/dashboard/RoomView.vue';
+import RoomDetailView from '@/views/dashboard/RoomDetailView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,9 +25,14 @@ const router = createRouter({
           component: DashboardView
         },
         {
-          path:'/room',
-          name: 'room',
+          path:'/rooms',
+          name: 'rooms',
           component: RoomView
+        },
+        {
+          path:'/room/:id',
+          name: 'room',
+          component: RoomDetailView
         },
         {
           path:'/home/employee',

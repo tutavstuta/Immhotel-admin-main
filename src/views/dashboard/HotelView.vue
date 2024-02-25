@@ -116,7 +116,7 @@
               </div>
             </div>
           </div>
-          <UploadImage class="mt-2 mb-3" @click="checked=false" @uploadresult="(msg)=>uploadSuccess=msg"/>
+          <UploadImage class="mt-2 mb-3" :url="uploadUrl" @click="checked=false" @uploadresult="(msg)=>uploadSuccess=msg"/>
           <div class="grid">
             <div class="col-4" v-for="(item, index) in hotel.image" key="index">
               <div id="image">
@@ -187,6 +187,7 @@ export default {
       ],
       checked: false,
       uploadSuccess: false,
+      uploadUrl:"http://localhost:3000/imm_hotel/hotel/upload"
     };
   },
   created() {

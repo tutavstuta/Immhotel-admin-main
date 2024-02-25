@@ -1,6 +1,6 @@
 <template>
-  <div class="card">
-    <DataTable :value="rooms" tableStyle="min-width: 50rem">
+  <div class="card"> 
+    <DataTable :value="rooms" tableStyle="min-width: 50rem" :rowHover="true" @row-click="rowClick($event)">
       <template #header>
         <div
           class="flex flex-wrap align-items-center justify-content-between gap-2"
@@ -14,12 +14,12 @@
         <template #body="slotProps">
           <img
             v-if="slotProps.data.image"
-            :src="`https://primefaces.org/cdn/primevue/images/product/${slotProps.data.image}`"
+            :src="`${baseUrl}/${slotProps.data.image}`"
             :alt="slotProps.data.image"
             class="w-6rem border-round"
           />
           <div v-else>
-            <Button label="เพิ่มรูป" />
+            <UploadImageSimple :url="baseUrl+'/imm_hotel/room/upload-cover/'+slotProps.data._id" @uploadresult="(result)=>uploadresult=result"/>
           </div>
         </template>
       </Column>
@@ -216,15 +216,19 @@
 import { RoomService } from "@/services/roomservice.js";
 import { useToast } from "primevue/usetoast";
 import { useConfirm } from "primevue/useconfirm";
+import UploadImageSimple from "@/components/UploadImageSimple.vue";
 
 export default {
-  components: {},
+  components: {
+    UploadImageSimple
+  },
   setup() {
     const roomService = new RoomService();
     return { roomService };
   },
   data() {
     return {
+      baseUrl:"",
       rooms: null,
       visible: false,
       editDialog: false,
@@ -238,10 +242,19 @@ export default {
         base_price: 0,
         room_amount: 0,
       },
+      uploadresult:false
     };
   },
   async mounted() {
     await this.getAllRooms();
+    this.baseUrl = import.meta.env.VITE_APP_BASE_URL
+  },
+  watch: {
+    async uploadresult(newUploadresult) {
+      
+      await this.getAllRooms();
+      this.uploadresult = false;
+    }
   },
   methods: {
     formatCurrency(value) {
@@ -414,6 +427,10 @@ export default {
 
       
     },
+    rowClick(e){
+      console.log('row click',e.data._id);
+      this.$router.push('/room/'+e.data._id);
+    }
   },
 };
 </script>
