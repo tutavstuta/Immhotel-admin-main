@@ -2,6 +2,7 @@
   <div class="card">
     <Toast />
     <FileUpload
+   
       name="image"
       :url=url
       @before-send="beforeSend($event)"
@@ -68,7 +69,7 @@
             <div
               v-for="(file, index) of files"
               :key="file.name + file.type + file.size"
-              class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3"
+              class="card m-0 p-3 flex flex-column border-1 surface-border align-items-center gap-3"
             >
               <div>
                 <img
@@ -99,7 +100,7 @@
             <div
               v-for="(file, index) of uploadedFiles"
               :key="file.name + file.type + file.size"
-              class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3"
+              class="card m-0 p-3 flex flex-column border-1 surface-border align-items-center gap-3"
             >
               <div>
                 <img

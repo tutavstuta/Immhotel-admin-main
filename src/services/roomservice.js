@@ -156,5 +156,28 @@ export class RoomService {
                     reject(error.response.data);
                 });
         });
+    };
+
+    deleteImage(id) {
+
+        return new Promise((resolve, reject) => {
+
+            let config = {
+                method: 'delete',
+                maxBodyLength: Infinity,
+                url: `${this.BASE_URL}/imm_hotel/room/image/${id}`,
+                headers: {
+                    'Authorization': `Bearer ${this.#token}`
+                }
+            };
+
+            axios.request(config)
+                .then((response) => {
+                    resolve(response.data);
+                })
+                .catch((error) => {
+                    reject(error.response.data);
+                });
+        });
     }
 }

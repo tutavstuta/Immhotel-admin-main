@@ -36,37 +36,32 @@
         </div>
         <div class="flex flex-column gap-2 mb-3">
           <label for="tumbon">ตำบล</label>
-          <Dropdown
+          <InputText
             v-model="hotel.tumbon"
-            :options="tumbons"
-            optionLabel="name"
             :placeholder="hotel.tumbon"
             class="w-full md:w-14rem"
           />
         </div>
         <div class="flex flex-column gap-2 mb-3">
           <label for="amphure">อำเภอ</label>
-          <Dropdown
+          <InputText
             v-model="hotel.amphure"
-            :options="amphures"
-            optionLabel="name"
+    
             :placeholder="hotel.amphure"
             class="w-full md:w-14rem"
           />
         </div>
         <div class="flex flex-column gap-2 mb-3">
           <label for="province">จังหวัด</label>
-          <Dropdown
+          <InputText
             v-model="hotel.province"
-            :options="provinces"
-            optionLabel="name"
             :placeholder="hotel.province"
             class="w-full md:w-14rem"
           />
         </div>
         <div class="flex flex-column gap-2 mb-3">
           <label for="country">ประเทศ</label>
-          <InputText id="country" v-model="hotel.country" />
+          <InputText id="country" v-model="hotel.country" class="w-full md:w-14rem"/>
         </div>
         <div class="flex flex-column gap-2 mb-3">
           <label for="description">รายละเอียด</label>
