@@ -6,6 +6,7 @@ import DashboardView from '@/views/dashboard/DashboardView.vue';
 import EmployeeView from "@/views/dashboard/EmployeeView.vue";
 import RoomView from '@/views/dashboard/RoomView.vue';
 import RoomDetailView from '@/views/dashboard/RoomDetailView.vue';
+import PromotionView from '@/views/dashboard/PromotionView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,12 +36,17 @@ const router = createRouter({
           component: RoomDetailView
         },
         {
-          path:'/home/employee',
+          path:'/promotion',
+          name: 'promotion',
+          component: PromotionView
+        },
+        {
+          path:'/employee',
           name: 'employee',
           component: EmployeeView
         },
         {
-          path:'/home/hotel',
+          path:'/hotel',
           name: 'hotel',
           component: () => import("@/views/dashboard/HotelView.vue")
         },

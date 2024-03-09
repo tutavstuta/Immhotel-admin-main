@@ -59,17 +59,17 @@ export default {
             {
               label: "โปรโมชั่น",
               icon: "pi pi-gift",
-              route: "/",
+              route: "/promotion",
             },
             {
               label: "พนักงาน",
               icon: "pi pi-user-edit",
-              route: "/home/employee",
+              route: "/employee",
             },
             {
               label: "ข้อมูลโรงแรม",
               icon: "pi pi-building",
-              route: "/home/hotel",
+              route: "/hotel",
             },
           ],
         },

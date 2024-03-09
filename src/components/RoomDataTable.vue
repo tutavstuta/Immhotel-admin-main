@@ -35,14 +35,20 @@
       <Column header="สถาณะ">
         <template #body="slotProps">
           <Tag
-            :value="slotProps.data.inventoryStatus"
-            :severity="getSeverity(slotProps.data)"
+            :value="slotProps.data.status"
+            :severity="getSeverity(slotProps.data.status)"
           />
         </template>
       </Column>
       <Column header="จัดการ">
         <template #body="slotProps">
           <div class="card flex justify-content-start">
+            <Button
+              icon="pi pi-cog"
+              severity="info"
+              @click="this.$router.push('/room/'+slotProps.data._id);"
+            ></Button>
+            <span class="px-2"> </span>
             <Button
               icon="pi pi-pencil"
               severity="warning"
@@ -295,7 +301,28 @@ export default {
         },
       });
     },
-    getSeverity() {},
+    getSeverity(status) {
+
+      let severity
+
+      switch (status) {
+        case "เปิดจอง":
+          severity="success"
+          break;
+
+          case "ปิดจองชั่วคราว":
+
+          break;
+
+          case "ยกเลิก":
+      
+        default:
+          break;
+      };
+
+      return severity
+
+    },
     async getAllRooms() {
       await this.roomService.getAllRooms().then((result) => {
         if (result && result.message === "get room successfully") {

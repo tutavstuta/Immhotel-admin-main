@@ -28,7 +28,7 @@
             <p>รูปภาพหน้าปก</p>
           </div>
           <div class="col-8">
-            <Panel header="รายละเอียดหลัก">
+            <Panel header="รายละเอียดหลัก" class="mb-3">
               <div class="grid">
                 <div class="col-6">ลักษณะห้อง</div>
                 <div class="col">{{ room.type }}</div>
@@ -50,6 +50,25 @@
                 <div class="col">{{ room.room_amount }}</div>
               </div>
             </Panel>
+            <Panel header="ภาพรวมของห้อง" class="mb-3">
+              <div v-if="room.roomOverview">
+
+              </div>
+              <div v-else class="">
+                <Button label="เพิ่ม" severity="primary"/>
+              </div>
+
+            </Panel>
+            <Panel header="สิ่งอำนวยความสะดวก" class="mb-3">
+              <div v-if="room.roomOverview">
+
+              </div>
+              <div v-else class="">
+                <Button label="เพิ่ม" severity="primary"/>
+              </div>
+
+            </Panel>
+
           </div>
         </div>
       </div>
