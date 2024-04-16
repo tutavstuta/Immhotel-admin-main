@@ -7,13 +7,14 @@ import EmployeeView from "@/views/dashboard/EmployeeView.vue";
 import RoomView from '@/views/dashboard/RoomView.vue';
 import RoomDetailView from '@/views/dashboard/RoomDetailView.vue';
 import PromotionView from '@/views/dashboard/PromotionView.vue';
+import SettingView from '@/views/dashboard/SettingView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path:'/',
-      redirect:'/home'
+      path: '/',
+      redirect: '/home'
     },
     {
       path: '/home',
@@ -26,29 +27,51 @@ const router = createRouter({
           component: DashboardView
         },
         {
-          path:'/rooms',
+          path: '/rooms',
           name: 'rooms',
           component: RoomView
         },
         {
-          path:'/room/:id',
+          path: '/room/:id',
           name: 'room',
           component: RoomDetailView
         },
         {
-          path:'/promotion',
+          path: '/promotion',
           name: 'promotion',
           component: PromotionView
         },
         {
-          path:'/employee',
+          path: '/employee',
           name: 'employee',
           component: EmployeeView
         },
         {
-          path:'/hotel',
+          path: '/hotel',
           name: 'hotel',
           component: () => import("@/views/dashboard/HotelView.vue")
+        },
+        {
+          path: '/setting',
+          name: 'setting',
+          component: SettingView,
+          children: [
+            {
+              path: '/setting',
+              name: 'room overview',
+              component: () => import('@/views/dashboard/setting/RoomOverview.vue')
+            },
+            {
+              path: '/setting/room-overview',
+              name: 'room overview',
+              component: () => import('@/views/dashboard/setting/RoomOverview.vue')
+            },
+            {
+              path: '/setting/room-amenity',
+              name: 'room amenity',
+              component: () => import('@/views/dashboard/setting/RoomAmenityView.vue')
+            }
+          ]
         },
       ]
     },

@@ -74,6 +74,17 @@ export default {
           ],
         },
         {
+          label:"ตั้งค่า",
+          items:[
+            {
+              label:"บริการพื้นฐาน",
+              icon:"pi pi-cog",
+              route:'/setting'
+            },
+           
+          ]
+        },
+        {
           label: "ข้อมูลส่วนตัว",
           items: [
             {

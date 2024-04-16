@@ -1,9 +1,7 @@
 <template>
-  <div>
+  <div v-if="loading">
     <BreadcrumbDashboard />
-    <div
-      class="flex align-items-start flex-column lg:justify-content-between lg:flex-row"
-    >
+    <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
       <div>
         <div class="font-medium text-3xl text-900">{{ room.type }}</div>
         <div class="flex align-items-center text-700 flex-wrap">
@@ -19,12 +17,7 @@
       <div class="col-8">
         <div class="grid">
           <div class="col-4">
-            <Image
-              :src="baseUrl + '/' + room.image"
-              alt="Image"
-              width="100%"
-              preview
-            />
+            <Image :src="baseUrl + '/' + room.image" alt="Image" width="100%" preview />
             <p>รูปภาพหน้าปก</p>
           </div>
           <div class="col-8">
@@ -51,21 +44,46 @@
               </div>
             </Panel>
             <Panel header="ภาพรวมของห้อง" class="mb-3">
-              <div v-if="room.roomOverview">
+              <div class="mb-3 flex justify-content-end">
+                <AssignRoomOverviewDialog :id="roomId" :overviewProps="room.overview_mapping" />
+              </div>
+              <div class="grid" v-if="room.overview_mapping">
+
+                <div v-for="(item, index) of room.overview_mapping" :key="index"
+                  class="col-3 align-items-ccenter text-center">
+                  <div>
+                    <Image height="50" :src="baseUrl + '/' + item.icon" />
+                  </div>
+                  <span>{{ item.name }}</span>
+                </div>
 
               </div>
-              <div v-else class="">
-                <Button label="เพิ่ม" severity="primary"/>
-              </div>
+
 
             </Panel>
             <Panel header="สิ่งอำนวยความสะดวก" class="mb-3">
-              <div v-if="room.roomOverview">
+              <div class="mb-3 flex justify-content-end">
+                <AssignRoomAmenityDialog :id="roomId" :amenityProps="room.amenity_mapping" />
+              </div>
+              <div class="grid" v-if="room.amenity_mapping">
+
+                <div v-for="(item, index) of room.amenity_mapping" :key="index"
+                  class="col-3 align-items-ccenter text-center">
+                  <div>
+                    <Image height="50" :src="baseUrl + '/' + item.icon" />
+                  </div>
+                  <span>{{ item.name }}</span>
+                </div>
+              </div>
+            </Panel>
+            <Panel header="รายละเอียดเพิ่มเติม" class="mb-3">
+              <div v-if="room.description">
 
               </div>
               <div v-else class="">
-                <Button label="เพิ่ม" severity="primary"/>
+                <Button label="เพิ่ม" severity="primary" />
               </div>
+              <p>{{ room.description }}</p>
 
             </Panel>
 
@@ -75,31 +93,15 @@
       <div class="col-4">
         <div class="text-start pl-3 border-round-sm font-bold">
           <Panel header="รูปภาพเพิ่มเติม" class="border-none">
-            <UploadImage
-              :url="baseUrl + '/imm_hotel/room/image/' + roomId"
-              @uploadresult="(result) => (uploadStatus = result)"
-            />
+            <UploadImage :url="baseUrl + '/imm_hotel/room/image/' + roomId"
+              @uploadresult="(result) => (uploadStatus = result)" />
             <div class="grid mt-3">
-              <div
-                class="col-4 relative image-container"
-                style="max-width: 33%"
-                v-for="(item, index) in room.image_mapping"
-              >
-                <Image
-                  :src="baseUrl + '/' + item.filename"
-                  alt="Image"
-                  width="100%"
-                  preview
-                />
+              <div class="col-4 relative image-container" style="max-width: 33%"
+                v-for="(item, index) in room.image_mapping">
+                <Image :src="baseUrl + '/' + item.filename" alt="Image" width="100%" preview />
                 <div class="absolute top-0 right-0 delete-btn">
-                  <Button
-                    icon="pi pi-times"
-                    severity="danger"
-                    text
-                    rounded
-                    aria-label="Cancel"
-                    @click="deleteImage(item._id)"
-                  />
+                  <Button icon="pi pi-times" severity="danger" text rounded aria-label="Cancel"
+                    @click="deleteImage(item._id)" />
                 </div>
               </div>
             </div>
@@ -109,6 +111,7 @@
     </div>
 
     <!-- end body -->
+
     <Toast />
   </div>
 </template>
@@ -117,10 +120,14 @@ import { RoomService } from "@/services/roomservice.js";
 import { useToast } from "primevue/usetoast";
 import BreadcrumbDashboard from "@/components/BreadcrumbDashboard.vue";
 import UploadImage from "@/components/UploadImage.vue";
+import AssignRoomAmenityDialog from "@/components/amenity/AssignRoomAmenityDialog.vue";
+import AssignRoomOverviewDialog from "@/components/overview/AssignRoomOverviewDialog.vue";
 export default {
   components: {
     BreadcrumbDashboard,
     UploadImage,
+    AssignRoomAmenityDialog,
+    AssignRoomOverviewDialog
   },
   setup() {
     const roomService = new RoomService();
@@ -128,6 +135,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       baseUrl: "",
       roomId: "",
       room: {},
@@ -147,12 +155,14 @@ export default {
   },
   methods: {
     async getRoom() {
+      this.loading = false;
       this.roomService.getRoomById(this.roomId).then((result) => {
         if (result && result.message === "get room  successfully") {
           console.log(result);
           this.room = result.data;
         }
       });
+      this.loading = true;
     },
     async deleteImage(id) {
       await this.roomService.deleteImage(id).then(async (result) => {
@@ -176,6 +186,7 @@ export default {
     display: none;
   }
 }
+
 .image-container:hover {
   .delete-btn {
     display: block;

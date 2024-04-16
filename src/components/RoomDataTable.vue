@@ -202,6 +202,17 @@
           autocomplete="off"
         />
       </div>
+      <div class="flex align-items-center gap-3 mb-5">
+        <label for="room-description" class="font-semibold w-10rem"
+          >รายละเอียดเพิ่มเติม</label
+        >
+        <Textarea 
+          v-model="room.description"
+          id="room-description"
+          class="flex-auto"
+          autocomplete="off"
+        />
+      </div>
       <div class="flex justify-content-end gap-2">
         <Button
           type="button"
@@ -247,6 +258,7 @@ export default {
         children: 0,
         base_price: 0,
         room_amount: 0,
+        description:""
       },
       uploadresult:false
     };
@@ -378,6 +390,7 @@ export default {
             children: result.data.children,
             base_price: result.data.base_price,
             room_amount: result.data.room_amount,
+            description : result.data.description
           };
         } else {
           this.editDialog = false;
