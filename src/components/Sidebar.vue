@@ -18,7 +18,7 @@ export default {
             {
               label: "การจอง",
               icon: "pi pi-calendar",
-              route: "/",
+              route: "/bookings",
               badge: "NEW",
             },
             {
@@ -44,7 +44,7 @@ export default {
             {
               label: "ห้องว่าง",
               icon: "pi pi-search",
-              route: "/",
+              route: "/availablerooms",
             },
           ],
         },

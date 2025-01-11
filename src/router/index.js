@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 import UserService from '@/services/userservice';
 import HomeView from '@/views/HomeView.vue';
 import LoginView from '@/views/LoginView.vue';
@@ -8,6 +8,8 @@ import RoomView from '@/views/dashboard/RoomView.vue';
 import RoomDetailView from '@/views/dashboard/RoomDetailView.vue';
 import PromotionView from '@/views/dashboard/PromotionView.vue';
 import SettingView from '@/views/dashboard/SettingView.vue';
+import BookingView from '@/views/dashboard/BookingView.vue';
+import AvailableRoomView from '@/views/dashboard/AvailableRoomView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,16 +22,31 @@ const router = createRouter({
       path: '/home',
       name: 'home',
       component: HomeView,
+      redirect:'/dashboard',
       children: [
         {
-          path: '/home',
+          path: '/dashboard',
           name: 'dashboard',
           component: DashboardView
+        },
+        {
+          path: '/bookings',
+          name: 'bookings',
+          component: BookingView
         },
         {
           path: '/rooms',
           name: 'rooms',
           component: RoomView
+        },
+        {
+          path: '/availablerooms',
+          name: 'availablerooms',
+          component: AvailableRoomView
+        },
+        {
+            path: '/room',
+            redirect:'/rooms'
         },
         {
           path: '/room/:id',

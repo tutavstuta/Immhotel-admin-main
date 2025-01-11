@@ -40,7 +40,7 @@ export default {
       const routes = this.$route.matched.map((el) => el.name);
 
       for (let i = 0; i < routes.length; i++) {
-        this.items.push({ label: routes[i] });
+        this.items.push({ label: routes[i],route:'/'+routes[i] });
       }
       
     },

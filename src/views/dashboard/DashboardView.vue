@@ -24,5 +24,6 @@ export default {
   <DashboardCard />
   <!-- Dashboard content -->
   <DashboardGraph />
+  <h3>การจองใหม่</h3>
   <DashboardTable />
 </template>
