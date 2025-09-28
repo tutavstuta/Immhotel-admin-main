@@ -23,7 +23,7 @@ export default {
   <PageHeading />
   <DashboardCard />
   <!-- Dashboard content -->
-  <DashboardGraph />
+  <!-- <DashboardGraph /> -->
   <h3>การจองใหม่</h3>
   <DashboardTable />
 </template>

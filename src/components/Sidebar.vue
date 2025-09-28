@@ -21,21 +21,21 @@ export default {
               route: "/bookings",
               badge: "NEW",
             },
-            {
-              label: "การชำระเงิน",
-              icon: "pi pi-dollar",
-              route: "/payin",
-            },
-            {
-              label: "เช็คอิน",
-              icon: "pi pi-sign-in",
-              route: "/",
-            },
-            {
-              label: "เช็คเอาท์",
-              icon: "pi pi-sign-out",
-              route: "/",
-            },
+            // {
+            //   label: "การชำระเงิน",
+            //   icon: "pi pi-dollar",
+            //   route: "/payin",
+            // },
+            // {
+            //   label: "เช็คอิน",
+            //   icon: "pi pi-sign-in",
+            //   route: "/",
+            // },
+            // {
+            //   label: "เช็คเอาท์",
+            //   icon: "pi pi-sign-out",
+            //   route: "/",
+            // },
           ],
         },
         {

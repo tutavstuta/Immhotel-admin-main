@@ -19,7 +19,7 @@
                 <template #body="{data}">
                     <div v-if="data.slip">
                         <span style="color: green;" >ชำระแล้ว</span>
-                        <SlipDialog/>
+                        <!-- <SlipDialog/> -->
                     </div>
                 </template>
             </Column>
