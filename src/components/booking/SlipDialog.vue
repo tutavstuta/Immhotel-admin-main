@@ -2,26 +2,36 @@
 <template>
     <div class="card flex justify-center">
         <Button label="Show" @click="visible = true" />
-        <Dialog v-model:visible="visible" modal header="Edit Profile" :style="{ width: '25rem' }">
-            <span class="text-surface-500 dark:text-surface-400 block mb-8">Update your information.</span>
+        <Dialog v-model:visible="visible" modal header="Slip" :style="{ width: '25rem' }">
+            <span class="text-surface-500 dark:text-surface-400 block mb-8">#REF: {{ booking.ref_number }}</span>
             <div class="flex items-center gap-4 mb-4">
-                <label for="username" class="font-semibold w-24">Username</label>
-                <InputText id="username" class="flex-auto" autocomplete="off" />
-            </div>
-            <div class="flex items-center gap-4 mb-8">
-                <label for="email" class="font-semibold w-24">Email</label>
-                <InputText id="email" class="flex-auto" autocomplete="off" />
+
+                <Image :src="baseUrl+'/'+booking.slip " alt="Slip" width="250" preview/>
             </div>
             <div class="flex justify-end gap-2">
-                <Button type="button" label="Cancel" severity="secondary" @click="visible = false"></Button>
-                <Button type="button" label="Save" @click="visible = false"></Button>
+                <Button type="button" label="close" severity="secondary" @click="visible = false"></Button>
             </div>
         </Dialog>
     </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
-
-const visible = ref(false);
+<script >
+import Image from 'primevue/image';
+export default {
+    components:{
+        Image
+    },
+    props:{
+        booking:Object
+    },
+    data(){
+        return {
+            baseUrl:"",
+            visible : false
+        }
+    },
+    mounted(){
+        this.baseUrl = import.meta.env.VITE_APP_BASE_URL
+    }
+}
 </script>

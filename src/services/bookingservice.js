@@ -99,7 +99,7 @@ export class BookingService {
             let config = {
                 method: 'get',
                 maxBodyLength: Infinity,
-                url: `${this.BASE_URL}/imm_hotel/booking/${bookingId}`,
+                url: `${this.BASE_URL}/imm_hotel/booking/ById/${bookingId}`,
                 headers: {
                     'Authorization': `Bearer ${this.#token}`
                 }
@@ -184,4 +184,5 @@ export class BookingService {
                 });
         });
     }
+
 }
