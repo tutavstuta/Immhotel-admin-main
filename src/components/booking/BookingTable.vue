@@ -15,15 +15,24 @@
             </Column>
             <Column field="room" header="ห้อง"></Column>
             <Column field="customer_name" header="ชื่อลูกค้า"></Column>
+            <Column header="การชำระเงิน">
+                <template #body="{data}">
+                    <div v-if="data.slip">
+                        <span style="color: green;" >ชำระแล้ว</span>
+                        <SlipDialog/>
+                    </div>
+                </template>
+            </Column>
         </DataTable>
     </div>
 </template>
 <script>
 
 import { BookingService } from '@/services/bookingservice';
+import SlipDialog from './SlipDialog.vue';
 export default {
     components:{
-     
+     SlipDialog
     },
     setup() {
         const bookingservice = new BookingService();

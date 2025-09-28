@@ -24,7 +24,7 @@ export default {
             {
               label: "การชำระเงิน",
               icon: "pi pi-dollar",
-              route: "/",
+              route: "/payin",
             },
             {
               label: "เช็คอิน",

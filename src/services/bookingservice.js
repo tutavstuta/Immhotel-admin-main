@@ -162,4 +162,26 @@ export class BookingService {
                 });
         });
     };
+
+    getByRefNumber(refNumber){
+        return new Promise((resolve, reject) => {
+
+            let config = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: `${this.BASE_URL}/imm_hotel/booking/byref/${refNumber}`,
+                headers: {
+                    'Authorization': `Bearer ${this.#token}`
+                },
+            };
+
+            axios.request(config)
+                .then((response) => {
+                    resolve(response.data.data);
+                })
+                .catch((error) => {
+                    reject(error.response.data);
+                });
+        });
+    }
 }

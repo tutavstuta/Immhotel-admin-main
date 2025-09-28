@@ -9,6 +9,7 @@ import RoomDetailView from '@/views/dashboard/RoomDetailView.vue';
 import PromotionView from '@/views/dashboard/PromotionView.vue';
 import SettingView from '@/views/dashboard/SettingView.vue';
 import BookingView from '@/views/dashboard/BookingView.vue';
+import PayInView from '@/views/dashboard/PayInView.vue';
 import AvailableRoomView from '@/views/dashboard/AvailableRoomView.vue';
 
 const router = createRouter({
@@ -33,6 +34,11 @@ const router = createRouter({
           path: '/bookings',
           name: 'bookings',
           component: BookingView
+        },
+        {
+          path: '/payin',
+          name: 'payin',
+          component: PayInView
         },
         {
           path: '/rooms',
