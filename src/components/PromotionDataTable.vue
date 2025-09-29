@@ -15,12 +15,7 @@
 
         </template>
       </Column>
-      <Column header="รูปภาพ">
-        <template #body="slotProps">
-          <img v-if="slotProps.data.image" :src="`${baseUrl}/${slotProps.data.image}`" :alt="slotProps.data.image"
-            class="w-6rem border-round" />
-        </template>
-      </Column>
+      
       <Column field="title" header="ชื่อโปรโมชั่น"></Column>
 
       <Column field="description" header="รายละเอียด"></Column>
@@ -93,14 +88,7 @@
         <label for="condition" class="font-semibold w-10rem">เงือนไข</label>
         <Textarea v-model="promotion.condition" rows="5" id="condition" class="flex-auto" autocomplete="off" />
       </div>
-      <div class="flex align-items-center gap-3 mb-5">
-        <label for="image" class="font-semibold w-10rem">รูปภาพ</label>
-        <label>
-          <img v-if="imagePreview" :src="imagePreview" style="width: 100px;" />
-          <span v-else>เลือกรูป</span>
-          <input id="image" type="file" @change="setImage($event)" style="display: none;" />
-        </label>
-      </div>
+      
 
       <div class="flex justify-content-end gap-2">
         <Button type="button" label="ยกเลิก" severity="secondary" @click="editDialog = false"></Button>

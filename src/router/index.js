@@ -45,6 +45,7 @@ const router = createRouter({
           name: 'rooms',
           component: RoomView
         },
+        
         {
           path: '/availablerooms',
           name: 'availablerooms',

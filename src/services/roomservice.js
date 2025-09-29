@@ -107,6 +107,23 @@ export class RoomService {
         });
     };
 
+    updateRoomMainDetail(roomId, data) {
+        let config = {
+            method: 'put', // หรือ 'patch' ตาม backend
+            maxBodyLength: Infinity,
+            url: `${this.BASE_URL}/imm_hotel/room/${roomId}`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.#token}`
+            },
+            data: JSON.stringify(data)
+        };
+
+        return axios.request(config)
+            .then((response) => response.data)
+            .catch((error) => { throw error.response.data });
+    }
+
     deleteRoom(roomId) {
         return new Promise((resolve, reject) => {
 

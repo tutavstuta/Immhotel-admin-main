@@ -38,16 +38,18 @@ export default {
             // },
           ],
         },
-        {
-          label: "ค้นหา",
-          items: [
-            {
-              label: "ห้องว่าง",
-              icon: "pi pi-search",
-              route: "/availablerooms",
-            },
-          ],
-        },
+        
+       // {
+          //label: "ค้นหา",
+          //items: [
+            //{
+              //label: "ห้องว่าง",
+              //icon: "pi pi-search",
+             // route: "/availablerooms",
+           // },
+          //],
+       // },
+        
         {
           label: "การจัดการ",
           items: [
@@ -55,6 +57,11 @@ export default {
               label: "ห้องพัก",
               icon: "pi pi-plus",
               route: "/rooms",
+            },
+            {
+              label: "ประชาสัมพันธ์",
+              icon: "pi pi-bell",
+              route: "/news",
             },
             {
               label: "โปรโมชั่น",

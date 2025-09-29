@@ -19,9 +19,17 @@
           <div class="col-4">
             <Image :src="baseUrl + '/' + room.image" alt="Image" width="100%" preview />
             <p>รูปภาพหน้าปก</p>
+            <UploadImage
+              :url="baseUrl + '/imm_hotel/room/upload-cover/' + roomId"
+              @uploadresult="(result) => (uploadStatus = result)"
+              label="เปลี่ยนรูปหน้าปก"
+            />
           </div>
           <div class="col-8">
             <Panel header="รายละเอียดหลัก" class="mb-3">
+              <div class="mb-3 flex justify-content-end">
+                <Button label="แก้ไข" severity="warning" @click="editMainDetailDialog = true" />
+              </div>
               <div class="grid">
                 <div class="col-6">ลักษณะห้อง</div>
                 <div class="col">{{ room.type }}</div>
@@ -77,14 +85,10 @@
               </div>
             </Panel>
             <Panel header="รายละเอียดเพิ่มเติม" class="mb-3">
-              <div v-if="room.description">
-
-              </div>
-              <div v-else class="">
-                <Button label="เพิ่ม" severity="primary" />
+              <div class="mb-3 flex justify-content-end">
+                <Button label="แก้ไข" severity="warning" @click="editDescriptionDialog = true" />
               </div>
               <p>{{ room.description }}</p>
-
             </Panel>
 
           </div>
@@ -113,6 +117,46 @@
     <!-- end body -->
 
     <Toast />
+
+    <Dialog v-model:visible="editMainDetailDialog" header="แก้ไขรายละเอียดหลัก" :modal="true" :closable="true">
+      <div class="p-fluid">
+        <div class="field">
+          <label>ลักษณะห้อง</label>
+          <InputText v-model="editRoom.type" />
+        </div>
+        <div class="field">
+          <label>ราคา</label>
+          <InputNumber v-model="editRoom.base_price" />
+        </div>
+        <div class="field">
+          <label>จำนวนผู้เช้าพักสูงสุด</label>
+          <InputNumber v-model="editRoom.max_person" />
+        </div>
+        <div class="field">
+          <label>เด็กพักฟรี</label>
+          <InputNumber v-model="editRoom.children" />
+        </div>
+        <div class="field">
+          <label>จำนวนห้องทั้งหมด</label>
+          <InputNumber v-model="editRoom.room_amount" />
+        </div>
+        <div class="flex justify-content-end mt-3">
+          <Button label="บันทึก" severity="success" @click="saveMainDetail" />
+        </div>
+      </div>
+    </Dialog>
+
+    <Dialog v-model:visible="editDescriptionDialog" header="แก้ไขรายละเอียดเพิ่มเติม" :modal="true" :closable="true">
+      <div class="p-fluid">
+        <div class="field">
+          <label>รายละเอียดเพิ่มเติม</label>
+          <Textarea v-model="editRoom.description" rows="5" autoResize />
+        </div>
+        <div class="flex justify-content-end mt-3">
+          <Button label="บันทึก" severity="success" @click="saveMainDetail" />
+        </div>
+      </div>
+    </Dialog>
   </div>
 </template>
 <script>
@@ -140,18 +184,10 @@ export default {
       roomId: "",
       room: {},
       uploadStatus: false,
+      editMainDetailDialog: false,
+      editDescriptionDialog: false,
+      editRoom: {},
     };
-  },
-  watch: {
-    async uploadStatus(newuploadStatus) {
-      await this.getRoom();
-      this.uploadStatus = false;
-    },
-  },
-  async mounted() {
-    this.baseUrl = import.meta.env.VITE_APP_BASE_URL;
-    this.roomId = this.$route.params.id;
-    await this.getRoom();
   },
   methods: {
     async getRoom() {
@@ -160,6 +196,7 @@ export default {
         if (result && result.message === "get room  successfully") {
           console.log(result);
           this.room = result.data;
+          this.editRoom = { ...result.data }; // initialize editRoom with room data
         }
       });
       this.loading = true;
@@ -177,6 +214,36 @@ export default {
         await this.getRoom();
       });
     },
+    async saveMainDetail() {
+      await this.roomService.updateRoomMainDetail(this.roomId, this.editRoom).then(async (result) => {
+        if (result && result.message === "update room successfully") {
+          this.$toast.add({
+            severity: "success",
+            summary: "บันทึกสำเร็จ",
+            detail: "แก้ไขรายละเอียดหลักสำเร็จ",
+            life: 3000,
+          });
+          this.editMainDetailDialog = false;
+          await this.getRoom();
+        }
+      });
+    },
+  },
+  watch: {
+    async uploadStatus(newuploadStatus) {
+      await this.getRoom();
+      this.uploadStatus = false;
+    },
+    editMainDetailDialog(val) {
+      if (val) {
+        this.editRoom = { ...this.room };
+      }
+    },
+  },
+  async mounted() {
+    this.baseUrl = import.meta.env.VITE_APP_BASE_URL;
+    this.roomId = this.$route.params.id;
+    await this.getRoom();
   },
 };
 </script>
