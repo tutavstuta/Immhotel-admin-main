@@ -11,6 +11,7 @@ import SettingView from '@/views/dashboard/SettingView.vue';
 import BookingView from '@/views/dashboard/BookingView.vue';
 import PayInView from '@/views/dashboard/PayInView.vue';
 import AvailableRoomView from '@/views/dashboard/AvailableRoomView.vue';
+import NewsView from '@/views/dashboard/NewsView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,11 @@ const router = createRouter({
           path: '/dashboard',
           name: 'dashboard',
           component: DashboardView
+        },
+        {
+          path: '/news',
+          name: 'news',
+          component: NewsView
         },
         {
           path: '/bookings',

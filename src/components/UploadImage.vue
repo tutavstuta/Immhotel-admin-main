@@ -42,16 +42,16 @@
               :disabled="!files || files.length === 0"
             ></Button>
           </div>
-          <ProgressBar
+          <!-- <ProgressBar
             :value="totalSizePercent"
             :showValue="false"
             :class="[
               'md:w-20rem h-1rem w-full md:ml-auto',
-              { 'exceeded-progress-bar': totalSizePercent > 100 },
+              { 'exceeded-progress-bar': totalSizePercent > 30 },
             ]"
             ><span class="white-space-nowrap"
               >{{ totalSize }}B / 1Mb</span
-            ></ProgressBar
+            ></ProgressBar-->
           >
         </div>
       </template>

@@ -1,38 +1,35 @@
 <template>
-  <div class="card">
-    <h2><span class="pi pi-bell mr-2"></span>ประชาสัมพันธ์</h2>
-    <p>แสดงข่าวสารหรือประกาศต่าง ๆ ของโรงแรมที่นี่</p>
-    <!-- ตัวอย่างรายการข่าว -->
-    <ul>
-      <li v-for="(item, idx) in newsList" :key="idx">
-        <b>{{ item.title }}</b><br>
-        <span class="text-sm">{{ item.date }}</span>
-        <div>{{ item.detail }}</div>
-        <hr>
-      </li>
-    </ul>
-  </div>
+    <div>
+        <BreadcrumbDashboard />
+        <div class="surface-section py-2">
+          <div
+             class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
+                <div>
+                    <div class="font-medium text-3xl text-900">News</div>
+                    <div class="flex align-items-center text-700 flex-wrap">
+                        <div class="mr-5 flex align-items-center mt-3">
+                            <i class="pi pi-gift mr-2"></i>
+                            <span>รายการ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- body -->
+        <NewsData />
+        <!-- end body -->
+    </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      newsList: [
-        { title: "แจ้งปิดปรับปรุงระบบ", date: "28 ก.ย. 2025", detail: "ระบบจะปิดปรับปรุงชั่วคราวเวลา 22:00 - 23:00 น." },
-        { title: "โปรโมชั่นใหม่!", date: "25 ก.ย. 2025", detail: "จองห้องพักวันนี้ รับส่วนลด 10% ทุกประเภทห้อง" }
-      ]
-    };
-  }
-};
-</script>
+import BreadcrumbDashboard from "@/components/BreadcrumbDashboard.vue";
+import NewsData from "@/components/NewsData.vue";
 
-<style scoped>
-.card {
-  padding: 2rem;
+
+export default {
+    components:{
+        BreadcrumbDashboard,
+        NewsData
+    }
 }
-.pi-bell {
-  font-size: 1.5rem;
-  color: #f59e42;
-}
-</style>
+</script>

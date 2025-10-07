@@ -341,10 +341,6 @@ export default {
 
 
     },
-    rowClick(e) {
-      console.log('row click', e.data._id);
-      this.$router.push('/promotion/' + e.data._id);
-    }
   },
 };
 </script>

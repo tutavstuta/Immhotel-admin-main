@@ -2,7 +2,7 @@ import axios from "axios"
 
 export class RoomService {
 
-    #token = localStorage.getItem('token');
+    token = localStorage.getItem('token');
     BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
     constructor(context) {
@@ -20,7 +20,7 @@ export class RoomService {
                 url: `${this.BASE_URL}/imm_hotel/room`,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 },
                 data: data
             };
@@ -44,7 +44,7 @@ export class RoomService {
                 maxBodyLength: Infinity,
                 url: `${this.BASE_URL}/imm_hotel/room`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 }
             };
 
@@ -67,7 +67,7 @@ export class RoomService {
                 maxBodyLength: Infinity,
                 url: `${this.BASE_URL}/imm_hotel/room/${roomId}`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 }
             };
 
@@ -92,7 +92,7 @@ export class RoomService {
                 url: `${this.BASE_URL}/imm_hotel/room/${roomId}`,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 },
                 data: data
             };
@@ -114,7 +114,7 @@ export class RoomService {
             url: `${this.BASE_URL}/imm_hotel/room/${roomId}`,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.#token}`
+                'Authorization': `Bearer ${this.token}`
             },
             data: JSON.stringify(data)
         };
@@ -132,7 +132,7 @@ export class RoomService {
                 maxBodyLength: Infinity,
                 url: `${this.BASE_URL}/imm_hotel/room/${roomId}`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 }
             };
 
@@ -160,7 +160,7 @@ export class RoomService {
                 maxBodyLength: Infinity,
                 url: `${this.BASE_URL}/imm_hotel/room/upload-cover/${id}`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 },
                 data: image
             };
@@ -184,7 +184,7 @@ export class RoomService {
                 maxBodyLength: Infinity,
                 url: `${this.BASE_URL}/imm_hotel/room/image/${id}`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 }
             };
 

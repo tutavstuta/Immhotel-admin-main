@@ -2,7 +2,7 @@ import axios from "axios"
 
 export class BookingService {
 
-    #token = localStorage.getItem('token');
+    token = localStorage.getItem('token');
     BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
     constructor(context) {
@@ -25,7 +25,7 @@ export class BookingService {
                 url: `${this.BASE_URL}/imm_hotel/booking`,
                 headers: {
                   
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 },
                 data: bookingData
             };
@@ -48,7 +48,7 @@ export class BookingService {
                 maxBodyLength: Infinity,
                 url: `${this.BASE_URL}/imm_hotel/booking`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 }
             };
 
@@ -76,7 +76,7 @@ export class BookingService {
             url: `${this.BASE_URL}/imm_hotel/booking/range`,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.#token}`
+                'Authorization': `Bearer ${this.token}`
             },
             data: data
         };
@@ -101,7 +101,7 @@ export class BookingService {
                 maxBodyLength: Infinity,
                 url: `${this.BASE_URL}/imm_hotel/booking/ById/${bookingId}`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 }
             };
 
@@ -126,7 +126,7 @@ export class BookingService {
                 url: `${this.BASE_URL}/imm_hotel/booking/${bookingId}`,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 },
                 data: data
             };
@@ -149,7 +149,7 @@ export class BookingService {
                 maxBodyLength: Infinity,
                 url: `${this.BASE_URL}/imm_hotel/booking/${bookingId}`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 }
             };
 
@@ -171,7 +171,7 @@ export class BookingService {
                 maxBodyLength: Infinity,
                 url: `${this.BASE_URL}/imm_hotel/booking/byref/${refNumber}`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 },
             };
 

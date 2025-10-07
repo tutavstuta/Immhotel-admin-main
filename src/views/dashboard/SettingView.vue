@@ -44,21 +44,7 @@ export default {
     data() {
         return {
             items: [
-            {
-                    label: 'Season price',
-                    icon: 'pi pi-dollar',
-                    route: '/setting'
-                },
-                {
-                    label: 'Holiday',
-                    icon: 'pi pi-calendar',
-                    route: '/setting'
-                },
-                {
-                    label: 'Weekend',
-                    icon: 'pi pi-sun',
-                    route: '/setting'
-                },
+            
                 {
                     label: 'Room overview',
                     icon: 'pi pi-book',

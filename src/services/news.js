@@ -1,34 +1,28 @@
 import axios from "axios"
 
-export class PromotionService {
-
-    #token = localStorage.getItem('token');
+export class NewsService {
+    token = localStorage.getItem('token');
     BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
     constructor(context) {
         this.context = context;
     }
 
-    createPromotion(promotionData, image) {
-
+    createnews(newsData, image) {
         const formData = new FormData();
-
-        for (let key of Object.keys(promotionData)) {
-            formData.append(key, promotionData[key]);
-        };
-
+        for (let key of Object.keys(newsData)) {
+            formData.append(key, newsData[key]);
+        }
         if (image) {
             formData.append('image', image);
         }
-
         return new Promise((resolve, reject) => {
-
             let config = {
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: `${this.BASE_URL}/imm_hotel/promotion`,
+                url: `${this.BASE_URL}/imm_hotel/news`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 },
                 data: formData
             };
@@ -40,43 +34,18 @@ export class PromotionService {
                     reject(error.response.data);
                 });
         })
-    };
+    }
 
-    getAllPromotions() {
+    getAllnews() {
         return new Promise((resolve, reject) => {
-
             let config = {
                 method: 'get',
                 maxBodyLength: Infinity,
-                url: `${this.BASE_URL}/imm_hotel/promotion/employee`,
+                url: `${this.BASE_URL}/imm_hotel/news/employee`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 }
             };
-
-            axios.request(config)
-                .then((response) => {
-                    resolve(response.data);
-                })
-                .catch((error) => {
-                    reject(error.response.data);
-                });
-
-        });
-    };
-
-    getPromotionById(promotionId) {
-        return new Promise((resolve, reject) => {
-
-            let config = {
-                method: 'get',
-                maxBodyLength: Infinity,
-                url: `${this.BASE_URL}/imm_hotel/promotion/${promotionId}`,
-                headers: {
-                    'Authorization': `Bearer ${this.#token}`
-                }
-            };
-
             axios.request(config)
                 .then((response) => {
                     resolve(response.data);
@@ -87,30 +56,44 @@ export class PromotionService {
         });
     }
 
-    updatePromotion(promotionId, promotionData,image) {
+    getnewsById(newsId) {
+        return new Promise((resolve, reject) => {
+            let config = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: `${this.BASE_URL}/imm_hotel/news/${newsId}`,
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            };
+            axios.request(config)
+                .then((response) => {
+                    resolve(response.data);
+                })
+                .catch((error) => {
+                    reject(error.response.data);
+                });
+        });
+    }
 
+    updatenews(newsId, newsData, image) {
         const formData = new FormData();
-
-        for (let key of Object.keys(promotionData)) {
-            formData.append(key, promotionData[key]);
-        };
-
+        for (let key of Object.keys(newsData)) {
+            formData.append(key, newsData[key]);
+        }
         if (image) {
             formData.append('image', image);
         }
-
         return new Promise((resolve, reject) => {
-
             let config = {
                 method: 'patch',
                 maxBodyLength: Infinity,
-                url: `${this.BASE_URL}/imm_hotel/promotion/${promotionId}`,
+                url: `${this.BASE_URL}/imm_hotel/news/${newsId}`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 },
                 data: formData
             };
-
             axios.request(config)
                 .then((response) => {
                     resolve(response.data);
@@ -119,20 +102,18 @@ export class PromotionService {
                     reject(error.response.data);
                 });
         });
-    };
+    }
 
-    deletePromotion(promotionId) {
+    deletenews(newsId) {
         return new Promise((resolve, reject) => {
-
             let config = {
                 method: 'delete',
                 maxBodyLength: Infinity,
-                url: `${this.BASE_URL}/imm_hotel/promotion/${promotionId}`,
+                url: `${this.BASE_URL}/imm_hotel/news/${newsId}`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 }
             };
-
             axios.request(config)
                 .then((response) => {
                     resolve(response.data);
@@ -141,7 +122,7 @@ export class PromotionService {
                     reject(error.response.data);
                 });
         });
-    };
+    }
 
     /**
      * 
@@ -149,19 +130,18 @@ export class PromotionService {
      * @param {FormData} image 
      * @returns 
      */
+
     uploadCoverImage(id, image) {
         return new Promise((resolve, reject) => {
-
             let config = {
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: `${this.BASE_URL}/imm_hotel/promotion/upload-cover/${id}`,
+                url: `${this.BASE_URL}/imm_hotel/news/upload-cover/${id}`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 },
                 data: image
             };
-
             axios.request(config)
                 .then((response) => {
                     resolve(response.data);
@@ -170,21 +150,18 @@ export class PromotionService {
                     reject(error.response.data);
                 });
         });
-    };
+    }
 
     deleteImage(id) {
-
         return new Promise((resolve, reject) => {
-
             let config = {
                 method: 'delete',
                 maxBodyLength: Infinity,
-                url: `${this.BASE_URL}/imm_hotel/promotion/image/${id}`,
+                url: `${this.BASE_URL}/imm_hotel/news/image/${id}`,
                 headers: {
-                    'Authorization': `Bearer ${this.#token}`
+                    'Authorization': `Bearer ${this.token}`
                 }
             };
-
             axios.request(config)
                 .then((response) => {
                     resolve(response.data);
